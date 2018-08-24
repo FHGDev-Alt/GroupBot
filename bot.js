@@ -4,21 +4,24 @@ const roblox = require('roblox-js')
 bot.login(process.env.bottok)
 roblox.login('FreakingHulk', process.env.password).catch(err => console.error("Something went wrong."))
 
-bot.commands = new discord.Collection()
+
+/*bot.commands = new discord.Collection()
+
 console.log("Loading commands...")
 require('fs').readdir('./commands/', (err, files) => {
   if (err) console.log("Couldn't load commands.")
   files.filter(f => f.split(".").pop() === "js").forEach((f,i) => {
     bot.commands.set(require(`./commands/${f}`).help.name, require(`./commands/${f}`))
   })
-})
+})*/
 
 bot.on('ready', () => {
   bot.user.setActivity('over Rangers of Fire', {type: "WATCHING"})
   console.log("GroupBot ready.")
+  bot.user.setAvatar("https://vignette.wikia.nocookie.net/logopedia/images/7/72/ROBLOX_O_2017_Logo.png")
 })
 
-let onShout = roblox.onShout
+let onShout = roblox.onShout(4173965)
 
 onShout.on('data', shout => {
   bot.channels.get('454037576442183680').send(`New shout! ${shout.message}\n\n@everyone`)
@@ -34,6 +37,7 @@ bot.on('message', message => {
       .then(() => message.channel.send("Shouted "+msg+" to group 4173965."))
       .catch(() => message.channel.send("Something went wrong..."))
   }
+  
   if (message.content.startsWith(":wallpost")) {
     let msg = args.join(' ');
     message.channel.send("Posting...")
@@ -41,6 +45,7 @@ bot.on('message', message => {
       .then(() => message.channel.send("Shouted "+msg+" to group 4173965."))
       .catch(() => message.channel.send("Something went wrong..."))
   }
+  
   if (message.content.startsWith(":exile")) {
     roblox.getIdFromUsername(args.join(' ')).then(id => {
       message.channel.send(`Exiling ${args.join(' ')}...`)
@@ -49,5 +54,4 @@ bot.on('message', message => {
       .catch(() => message.channel.send(`Something went wrong...`))
     })
   }
-  
 })

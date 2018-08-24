@@ -18,12 +18,36 @@ bot.on('ready', () => {
   console.log("GroupBot ready.")
 })
 
+let onShout = roblox.onShout
+
+onShout.on('data', shout => {
+  bot.channels.get('454037576442183680').send(`New shout! ${shout.message}\n\n@everyone`)
+  console.log(shout.message)
+})
+           
 bot.on('message', message => {
   let args = message.content.split(" ").slice(1)
   if (message.content.startsWith(":shout")) {
     let msg = args.join(' ');
     message.channel.send("Shouting...")
-    roblox.shout(4173965, msg).then(() => message.channel.send("Shouted "+msg+" to group 4173965."))
-    .catch(() => message.channel.send("Something went wrong..."))
+    roblox.shout(4173965, msg)
+      .then(() => message.channel.send("Shouted "+msg+" to group 4173965."))
+      .catch(() => message.channel.send("Something went wrong..."))
   }
+  if (message.content.startsWith(":wallpost")) {
+    let msg = args.join(' ');
+    message.channel.send("Posting...")
+    roblox.post(4173965, msg)
+      .then(() => message.channel.send("Shouted "+msg+" to group 4173965."))
+      .catch(() => message.channel.send("Something went wrong..."))
+  }
+  if (message.content.startsWith(":exile")) {
+    roblox.getIdFromUsername(args.join(' ')).then(id => {
+      message.channel.send(`Exiling ${args.join(' ')}...`)
+      roblox.exile(4173965, id, true)
+      .then(() => message.channel.send(`Exiled user with id ${id} from group 4173965.`)
+      .catch(() => message.channel.send(`Something went wrong...`)
+    })
+  }
+  
 })

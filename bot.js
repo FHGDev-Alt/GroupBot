@@ -18,13 +18,12 @@ require('fs').readdir('./commands/', (err, files) => {
 bot.on('ready', () => {
   bot.user.setActivity('over Rangers of Fire', {type: "WATCHING"})
   console.log("GroupBot ready.")
-  bot.user.setAvatar("https://vignette.wikia.nocookie.net/logopedia/images/7/72/ROBLOX_O_2017_Logo.png")
 })
 
 let onShout = roblox.onShout(4173965)
 
 onShout.on('data', shout => {
-  bot.channels.get('454037576442183680').send(`New shout! ${shout.message}\n\n@everyone`)
+  bot.channels.get('454037576442183680').send(`New shout!\n\n${shout.message}\n\n@everyone`)
   console.log(shout.message)
 })
            

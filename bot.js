@@ -23,7 +23,7 @@ bot.on('message', message => {
   if (message.content.startsWith(":shout")) {
     let msg = args.join(' ');
     message.channel.send("Shouting...")
-    roblox.shout(4173965, msg).then(() => message.channel.send("Shouted "+msg+" to group 4173965.")
+    roblox.shout(4173965, msg).then(() => message.channel.send("Shouted "+msg+" to group 4173965."))
     .catch(() => message.channel.send("Something went wrong..."))
   }
 })

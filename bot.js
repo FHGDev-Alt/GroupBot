@@ -45,8 +45,8 @@ bot.on('message', message => {
     roblox.getIdFromUsername(args.join(' ')).then(id => {
       message.channel.send(`Exiling ${args.join(' ')}...`)
       roblox.exile(4173965, id, true)
-      .then(() => message.channel.send(`Exiled user with id ${id} from group 4173965.`)
-      .catch(() => message.channel.send(`Something went wrong...`)
+      .then(() => message.channel.send(`Exiled user with id ${id} from group 4173965.`))
+      .catch(() => message.channel.send(`Something went wrong...`))
     })
   }
   

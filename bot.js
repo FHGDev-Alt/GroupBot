@@ -41,7 +41,7 @@ bot.on('message', message => {
     let msg = args.join(' ');
     message.channel.send("Posting...")
     roblox.post(4173965, msg)
-      .then(() => message.channel.send("Shouted "+msg+" to group 4173965."))
+      .then(() => message.channel.send("Wallposted "+msg+" to group 4173965."))
       .catch(() => message.channel.send("Something went wrong..."))
   }
   
